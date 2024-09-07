@@ -1,0 +1,78 @@
+Port Scan Type	Example Command
+TCP Null Scan	sudo nmap -sN MACHINE_IP
+TCP FIN Scan	sudo nmap -sF MACHINE_IP
+TCP Xmas Scan	sudo nmap -sX MACHINE_IP
+TCP Maimon Scan	sudo nmap -sM MACHINE_IP
+TCP ACK Scan	sudo nmap -sA MACHINE_IP
+TCP Window Scan	sudo nmap -sW MACHINE_IP
+Custom TCP Scan	sudo nmap --scanflags URGACKPSHRSTSYNFIN MACHINE_IP
+Spoofed Source IP	sudo nmap -S SPOOFED_IP MACHINE_IP
+Spoofed MAC Address	--spoof-mac SPOOFED_MAC
+Decoy Scan	nmap -D DECOY_IP,ME MACHINE_IP
+Idle (Zombie) Scan	sudo nmap -sI ZOMBIE_IP MACHINE_IP
+Fragment IP data into 8 bytes	-f
+Fragment IP data into 16 bytes	-ff
+Option	Purpose
+--source-port PORT_NUM
+
+specify source port number
+--data-length NUM
+
+append random data to reach given length
+These scan types rely on setting TCP flags in unexpected ways to prompt ports for a reply. Null, FIN, and Xmas scan provoke a response from closed ports, while Maimon, ACK, and Window scans provoke a response from open and closed ports.
+
+Option	Purpose
+--reason	explains how Nmap made its conclusion
+-v	verbose
+-vv	very verbose
+-d	debugging
+-dd	more details for debugging
+
+
+___________________________________________________________________________________
+
+In this room, we learned how to detect the running services and their versions along with the host operating system. We learned how to enable traceroute and we covered selecting one or more scripts to aid in penetration testing. Finally, we covered the different formats to save the scan results for future reference. The table below summarizes the most important options we covered in this room.
+
+Option	Meaning
+-sV	determine service/version info on open ports
+-sV --version-light	try the most likely probes (2)
+-sV --version-all	try all available probes (9)
+-O	detect OS
+--traceroute	run traceroute to target
+--script=SCRIPTS	Nmap scripts to run
+-sC or --script=default	run default scripts
+-A	equivalent to -sV -O -sC --traceroute
+-oN	save output in normal format
+-oG	save output in grepable format
+-oX	save output in XML format
+-oA	save output in normal, XML and Grepable formats
+
+
+___________________________________________________________________________________
+
+It is good to remember the default port number for common protocols. Below is a summary of the protocols we covered, sorted in alphabetical order, along with their default port numbers.
+
+Protocol	TCP Port	Application(s)	Data Security
+FTP	21	File Transfer	Cleartext
+HTTP	80	Worldwide Web	Cleartext
+IMAP	143	Email (MDA)	Cleartext
+POP3	110	Email (MDA)	Cleartext
+SMTP	25	Email (MTA)	Cleartext
+Telnet	23	Remote Access	Cleartext
+
+
+___________________________________________________________________________________
+
+Servers implementing these protocols are subject to different kinds of attacks. To name a few, consider:
+
+Sniffing Attack (Network Packet Capture)
+Man-in-the-Middle (MITM) Attack
+Password Attack (Authentication Attack)
+Vulnerabilities
+From a security perspective, we always need to think about what we aim to protect; consider the security triad: Confidentiality, Integrity, and Availability (CIA). Confidentiality refers to keeping the contents of the communications accessible to the intended parties. Integrity is the idea of assuring any data sent is accurate, consistent, and complete when reaching its destination. Finally, availability refers to being able to access the service when we need it. Different parties will put varying emphasis on these three. For instance, confidentiality would be the highest priority for an intelligence agency. Online banking will put most emphasis on the integrity of transactions. Availability is of the highest importance for any platform making money by serving ads.
+
+Knowing that we are protecting the Confidentiality, Integrity, and Availability (CIA), an attack aims to cause Disclosure, Alteration, and Destruction (DAD). The figures below reflect this.
+
+
+___________________________________________________________________________________
+
